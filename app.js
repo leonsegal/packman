@@ -1,32 +1,24 @@
-const order = [	200, 300, 400];
-const items = [{vol: 1,	wgt: 1, count: order[0]}, {vol: 2, wgt: 2, count: order[1]}, {vol: 3, wgt: 3, count: order[2]}];
-const boxes = [{maxVol: 30, maxWgt: 15}, {maxVol: 20, maxWgt: 10}, {maxVol: 20, maxWgt: 10}];
+const 
+	order = [555, 300, 400],
+	items = [{vol: 3, wgt: 1, count: order[0]}, {vol: 2, wgt: 2, count: order[1]}, {vol: 1, wgt: 3, count: order[2]}],
+	boxes = [{maxVol: 30, maxWgt: 15}, {maxVol: 20, maxWgt: 10}, {maxVol: 10, maxWgt: 5}],
+	boxMaxes = []
+	boxNumber = 0;
 
-const
-	item1Vol = order[0] * items[0].vol,
-	item1Wgt = order[0] * items[0].wgt,
-	maxCountBox1Item1Vol = boxes[0].maxVol/items[0].vol,
-	maxCountBox1Item1Wgt = boxes[0].maxWgt/items[0].wgt,
-	maxCountBox1Item1 = Math.min(maxCountBox1Item1Vol, maxCountBox1Item1Wgt);
+function getBoxCount(itemVol, boxVol) {
+	const 
+		remainder =  itemVol % boxVol,
+		numBoxes = Math.round(itemVol / boxVol);
 
-const orderBoxes = [];
+		boxMaxes.push(numBoxes);
 
-function getBoxCount (box) {
-	items.forEach(item => {
-		const 
-			itemVol = item.count * item.vol,
-			itemWgt = item.count * item.wgt,
-			maxCountVol = box.maxVol / item.vol,
-			maxCountWgt = box.maxWgt / item.wgt,
-			maxCount = Math.min(maxCountVol, maxCountWgt),
-			boxCount = item.count / maxCount;	
+	boxNumber += 1;
 
-		orderBoxes.push(boxCount);
-	});
+	if (boxNumber < numBoxes) {
+		getBoxCount(remainder, boxes[boxNumber].maxVol);
+	}
 }
 
-boxes.forEach(box => {
-	getBoxCount(box);
-});
+getBoxCount(items[0].vol * items[0].count, boxes[boxNumber].maxVol);
 
-console.log(orderBoxes);
+console.log(boxMaxes);
