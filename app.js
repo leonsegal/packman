@@ -3,7 +3,7 @@ const
 	_ = require('lodash');
 	// TODO: something like this:
 	// newOrders = [[item[0], 53463],[item[1], 4747],[item[2], 43754],[item[3], 9933]],
-	orders = [4523553245235353200000000000000000000000848390285985987697687687697678676969845362, 1262360, 12620, 326326],
+	orders = [444, 1262360, 12620, 326326],
 	items = [
 		{vol: 10, wgt: 3, count: orders[0]},
 		{vol: 32, wgt: 2, count: orders[1]},
@@ -23,7 +23,7 @@ const
 _.forEach(itemsBoxesVolWgt, item => minCapacities.push(item[0] < item[1] ? item[0] : item[1]));
 minCapacities = _.chunk(minCapacities,3);
 
-const getBoxCount = (items, boxList = [], step = 0, boxCapacityList = minCapacities[step]) => {
+const getBoxCount = (items, boxList = [], step = 0, boxCapacityList = minCapacities[0]) => {
 	const
 		boxCount = Math.floor(items / boxCapacityList[step]),
 		remainder = items % boxCapacityList[step];
