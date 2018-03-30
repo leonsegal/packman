@@ -1,20 +1,20 @@
 const
-	order = [26, 10, 10],
+	orders = [26, 10, 10],
 	items = [
 		{
 			vol: 10,
 			wgt: 1,
-			count: order[0],
+			count: orders[0],
 		},
 		{
 			vol: 32,
 			wgt: 2,
-			count: order[1],
+			count: orders[1],
 		},
 		{
 			vol: 11,
 			wgt: 3,
-			count: order[2],
+			count: orders[2],
 		},],
 	boxes = [
 		{
@@ -30,7 +30,25 @@ const
 			maxWgt: 5,
 		},
 	],
-	itemsPerBox = items.map(item => boxes.map(box => Math.floor(box.maxVol / item.vol)));
+	// [ 10, 6, 2 ] [ 3, 1, 0 ] [ 9, 5, 2 ]
+	itemsBoxes = items.map(item => boxes.map(box => Math.floor(box.maxVol / item.vol)));
 
-console.log(itemsPerBox);
-// [ 10, 6, 2 ] [ 3, 1, 0 ] [ 9, 5, 2 ]
+const getBoxCount = (items, boxList = [], step = 0, boxCapacityList = itemsBoxes[0]) => {
+	const
+		boxCount = Math.floor(items / boxCapacityList[step]),
+		remainder = items % boxCapacityList[step];
+
+	if (boxCount) {
+		boxList.push(boxCount);
+	}
+
+	if (remainder) {
+		getBoxCount(remainder, boxList, ++step);
+	}
+
+	return boxList;
+};
+
+finalList = getBoxCount(orders[0]);
+
+console.log(finalList);
