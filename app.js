@@ -1,28 +1,27 @@
 const 
-	order = [
-		3334, 
-		3333, 
-		3333
-	],
+	order = [26, 10, 10],
 	items = [
-		{vol: 17.5, wgt: 1, count: order[0]}, 
+		{vol: 17, wgt: 1, count: order[0]}, 
 		{vol: 32, wgt: 2, count: order[1]}, 
 		{vol: 11, wgt: 3, count: order[2]}
 	],
 	boxes = [
-		{maxVol: 40, maxWgt: 15}, 
-		{maxVol: 20, maxWgt: 10}, 
-		{maxVol: 5, maxWgt: 5}
+		{maxVol: 10, maxWgt: 15}, 
+		{maxVol: 9, maxWgt: 10}, 
+		{maxVol: 8, maxWgt: 5}
 	],
 	bigList = [];
 
 function getBoxCountList(itemsVol, boxVol, boxMaxList = [], boxNumber = 0) {
-	const thisBoxCount = Math.round(itemsVol / boxVol);
+	let
+		boxCount = Math.round(itemsVol / boxVol),
+		remain = itemsVol % boxVol;
 
-	boxMaxList.push(thisBoxCount);
+	boxMaxList.push(boxCount); // what if zero?
+	boxNumber += 1;
 
-	if (itemsVol / boxVol > thisBoxCount) {
-		getBoxCountList(itemsVol % boxVol, boxes[boxNumber += 1].maxVol, boxMaxList, boxNumber);
+	if (itemsVol / boxVol > boxCount && boxNumber < boxes.length) {
+		getBoxCountList(remain, boxes[boxNumber].maxVol, boxMaxList, boxNumber);
 	}
 
 	return boxMaxList;
