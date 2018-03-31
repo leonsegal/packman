@@ -1,11 +1,10 @@
 console.time('app time');
 const
 	_ = require('lodash');
-	// TODO: something like this:
 	// newOrders = [[item[0], 53463],[item[1], 4747],[item[2], 43754],[item[3], 9933]],
 	orders = [444, 1262360, 12620, 326326],
 	items = [
-		{vol: 10, wgt: 3, count: orders[0]},
+		{vol: 14, wgt: 2, count: orders[0]},
 		{vol: 32, wgt: 2, count: orders[1]},
 		{vol: 11, wgt: 3, count: orders[2]},
 		{vol: 44, wgt: 3, count: orders[3]},
@@ -18,10 +17,7 @@ const
 	itemsBoxesVol = items.map(item => boxes.map(box => Math.floor(box.maxVol / item.vol))),
 	itemsBoxesWgt = items.map(item => boxes.map(box => Math.floor(box.maxWgt / item.wgt))),
 	itemsBoxesVolWgt = _.zip(_.flatten(itemsBoxesVol), _.flatten(itemsBoxesWgt)),
-	minCapacities = [];
-
-_.forEach(itemsBoxesVolWgt, item => minCapacities.push(item[0] < item[1] ? item[0] : item[1]));
-minCapacities = _.chunk(minCapacities,3);
+	minCapacities = _.chunk(_.map(itemsBoxesVolWgt, item => (item[0] < item[1] ? item[0] : item[1])), 3);
 
 const getBoxCount = (items, boxList = [], step = 0, boxCapacityList = minCapacities[0]) => {
 	const
