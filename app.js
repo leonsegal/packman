@@ -35,5 +35,6 @@ const getBoxCount = (items, boxList = [], step = 0, boxCapacityList = minCapacit
 	return boxList;
 };
 
-console.log(getBoxCount(orders[0]));
+const boxesNeeded = _.map(orders, order => getBoxCount(order));
+console.log(boxesNeeded);
 console.timeEnd('app time');
