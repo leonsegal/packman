@@ -1,24 +1,29 @@
 const _ = require('lodash');
 
-const getBoxCount = (items, boxCapacityList, step = 0, boxList = []) => {
+const getBoxCountSingle = (items, boxCapacityList, step = 0, boxList = []) => {
 	let boxCount = Math.floor(items / boxCapacityList[step]);
-	const remainder = items % boxCapacityList[step];
+	const
+		remainder = items % boxCapacityList[step],
+		lastStep = boxCapacityList.length - 1;
 
-	if (remainder && step === boxCapacityList.length - 1) {
+	if (remainder && step === lastStep) {
 		boxCount += 1;
 	}
 
 	if (boxCount) {
-		boxList.push([`box ${step+1}`, boxCount]);
+		boxList.push([`box ${step + 1}`, boxCount]);
 	}
 
-	if (remainder && step < boxCapacityList.length - 1) {
+	if (remainder && step !== lastStep) {
 		step += 1;
 
-		getBoxCount(remainder, boxCapacityList, step, boxList);
+		getBoxCountSingle(remainder, boxCapacityList, step, boxList);
 	}
 
 	return boxList;
 };
 
-exports.getBoxCount = getBoxCount;
+const getBoxCountMultiple = (items, capacityList) => items.forEach(item => getBoxCountSingle(item, capacityList));
+
+exports.getBoxCountSingle = getBoxCountSingle;
+exports.getBoxCountMultiple = getBoxCountMultiple;
