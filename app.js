@@ -23,7 +23,7 @@ const getBoxCountSingle = (items, boxCapacityList, step = 0, boxList = []) => {
 	return boxList;
 };
 
-const getBoxCountMultiple = (items, capacityList) => _.map(items, item => getBoxCountSingle(item, capacityList));
+const getBoxCountMultiple = (multiItems, capacityList) => _.map(multiItems, (item, key) => getBoxCountSingle(item, capacityList[key]));
 
 exports.getBoxCountSingle = getBoxCountSingle;
 exports.getBoxCountMultiple = getBoxCountMultiple;

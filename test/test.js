@@ -1,4 +1,6 @@
-const app = require('../app');
+const
+	app = require('../app'),
+	data = require('../process-data');
 
 QUnit.test( "one big box", assert => assert.deepEqual(
 		app.getBoxCountSingle([10], [10, 5, 2]),
@@ -25,7 +27,7 @@ QUnit.test( "overflow", assert => assert.deepEqual(
 );
 
 QUnit.test( "multi", assert => assert.deepEqual(
-		app.getBoxCountMultiple([18, 10], [10, 5, 2]),
+		app.getBoxCountMultiple([18, 10], [[10, 5, 2], [10, 5, 2]]),
 		[ [[ 'box 1', 1 ], [ 'box 2', 1 ], [ 'box 3', 2 ]], [[ 'box 1', 1 ]]],
 		"should return moar!")
 );
