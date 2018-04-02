@@ -1,11 +1,10 @@
-const
-	_ = require('lodash');
+const _ = require('lodash');
 
 const getBoxCount = (items, boxCapacityList, step = 0, boxList = []) => {
 	let boxCount = Math.floor(items / boxCapacityList[step]);
 	const remainder = items % boxCapacityList[step];
 
-	if (!boxCount && remainder && step === boxCapacityList.length - 1) {
+	if (remainder && step === boxCapacityList.length - 1) {
 		boxCount += 1;
 	}
 
