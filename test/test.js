@@ -26,6 +26,6 @@ QUnit.test( "overflow", assert => assert.deepEqual(
 
 QUnit.test( "multi", assert => assert.deepEqual(
 		app.getBoxCountMultiple([18, 10], [10, 5, 2]),
-		[ [ 'box 1', 1 ], [ 'box 2', 1 ], [ 'box 3', 2 ] ],
+		[ [[ 'box 1', 1 ], [ 'box 2', 1 ], [ 'box 3', 2 ]], [[ 'box 1', 1 ]]],
 		"should return moar!")
 );
