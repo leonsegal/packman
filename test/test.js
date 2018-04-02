@@ -1,4 +1,3 @@
-// const app = require('../app');
 const app = require('../app');
 
 QUnit.test( "one big box", assert => {
@@ -20,4 +19,11 @@ QUnit.test( "one big box, one medium box, one small box", assert => {
 		app.getBoxCount([17], [10, 5, 2]),
 		[ [ 'box 1', 1 ], [ 'box 2', 1 ], [ 'box 3', 1 ] ],
 		"should return one big box, one medium box, one small box");
+});
+
+QUnit.test( "overflow", assert => {
+	assert.deepEqual(
+		app.getBoxCount([18], [10, 5, 2]),
+		[ [ 'box 1', 1 ], [ 'box 2', 1 ], [ 'box 3', 2 ] ],
+		"should return one big box, one medium box, two small boxes");
 });

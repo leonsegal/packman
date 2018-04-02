@@ -1,14 +1,13 @@
-
 const
-	_ = require('lodash'),
-	data = require('./data'),
-	// orders = [10, 11, 12, 13];
-	orders = [10];
+	_ = require('lodash');
 
 const getBoxCount = (items, boxCapacityList, step = 0, boxList = []) => {
-	const
-		boxCount = Math.floor(items / boxCapacityList[step]),
-		remainder = items % boxCapacityList[step];
+	let boxCount = Math.floor(items / boxCapacityList[step]);
+	const remainder = items % boxCapacityList[step];
+
+	if (!boxCount && remainder && step === boxCapacityList.length - 1) {
+		boxCount += 1;
+	}
 
 	if (boxCount) {
 		boxList.push([`box ${step+1}`, boxCount]);
@@ -17,20 +16,10 @@ const getBoxCount = (items, boxCapacityList, step = 0, boxList = []) => {
 	if (remainder) {
 		step += 1;
 
-		if (step === boxCapacityList.length) {
-			boxList.push([`box ${step}`, 1]);
-		}
-
 		getBoxCount(remainder, boxCapacityList, step, boxList);
 	}
 
 	return boxList;
 };
 
-const boxesNeeded = _.map(
-	orders,
-	(order, key) => getBoxCount(order, data.minCapacities[key])
-);
-console.log(getBoxCount([10],[10,5,2]));
 exports.getBoxCount = getBoxCount;
-exports.orders = orders;

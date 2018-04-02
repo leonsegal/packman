@@ -1,5 +1,4 @@
 const
-	test = 2,
 	_ = require('lodash'),
 		items = [
 		{vol: 1, wgt: 1},
@@ -16,4 +15,5 @@ const
 	itemsBoxesWgt = items.map(item => boxes.map(box => Math.floor(box.maxWgt / item.wgt))),
 	itemsBoxesVolWgt = _.zip(_.flatten(itemsBoxesVol), _.flatten(itemsBoxesWgt)),
 	minCapacities = _.chunk(_.map(itemsBoxesVolWgt, item => (item[0] < item[1] ? item[0] : item[1])), 3);
+
 exports.minCapacities = minCapacities;
