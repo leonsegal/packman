@@ -40,4 +40,6 @@ QUnit.test('multi, many boxes',
 	assert => assert.deepEqual(
 		app.getBoxCountMultiple([18, 18], [[10, 5, 2], [10, 5, 1]]),
 		[[['box 1', 1], ['box 2', 1], ['box 3', 2]], [['box 1', 1], ['box 2', 1], ['box 3', 3]]],
-		'should return one big box, one medium box, two small boxes for items 1 and 2 (plus extra small box)	'));
+		'should return one big box, one medium box, two small boxes for items 1 and 2 (plus extra small box)'));
+
+// check if items/capacity list don't match up
