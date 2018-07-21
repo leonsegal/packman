@@ -10,9 +10,7 @@ const getBoxCountSingle = (items, boxCapacityList, step = 0, boxList = []) => {
 		boxCount += 1;
 	}
 
-	if (boxCount) {
-		boxList.push([`box ${step + 1}`, boxCount]);
-	}
+	boxCount && boxList.push([`box ${step + 1}`, boxCount]);
 
 	if (remainder && step !== lastStep) {
 		step += 1;
